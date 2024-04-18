@@ -21,10 +21,29 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
      </mat-form-field>
 
      <mat-form-field appearance="outline">
-      <mat-label>description</mat-label>
-      <input formControlName="description" type="text" matInput>
+      <mat-label>month</mat-label>
+      <input formControlName="month" type="text" matInput>
       <mat-error>description is required</mat-error>
      </mat-form-field>
+
+     <mat-form-field appearance="outline">
+      <mat-label>year</mat-label>
+      <input formControlName="year" type="text" matInput>
+      <mat-error>year is required</mat-error>
+     </mat-form-field>
+
+     <mat-form-field appearance="outline">
+      <mat-label>Chief Executive officer</mat-label>
+      <input formControlName="CEO" type="text" matInput>
+      <mat-error>This field is required</mat-error>
+     </mat-form-field>
+
+     <mat-form-field appearance="outline">
+      <mat-label>Chief Operating officer</mat-label>
+      <input formControlName="COO" type="text" matInput>
+      <mat-error>This field is required</mat-error>
+     </mat-form-field>
+
 
      @if (download) {
         <button mat-raised-button color="primary" (click)="downloadPdf()">
@@ -57,7 +76,10 @@ export class TemplateThreeFormComponent {
 
   form = this.fb.group({
     name: ['', Validators.required],
-    description: ['', Validators.required],
+    year: ['', Validators.required],
+    month: ['', Validators.required],
+    COO: ['', Validators.required],
+    CEO: ['', Validators.required],
   });
 
   http = inject(HttpClient);
@@ -70,7 +92,10 @@ export class TemplateThreeFormComponent {
         'http://localhost:8080/certificates/generate-completion-certificate',
         {
           name: this.form.value.name,
-          description: this.form.value.description,
+          year: this.form.value.year,
+          month: this.form.value.month,
+          CEO:  this.form.value.CEO,
+          COO: this.form.value.COO,
         }
       )
       .subscribe(() => {
