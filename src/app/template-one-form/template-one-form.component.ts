@@ -22,7 +22,7 @@ import { saveAs } from 'file-saver';
   ],
   template: `
     <form [formGroup]="form">
-      <h3>Participation certificate</h3>
+      <h3 class="mat-headline-5">Participation certificate</h3>
       <mat-form-field appearance="outline">
         <mat-label>name</mat-label>
         <input name="naam" formControlName="name" type="text" matInput />

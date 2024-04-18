@@ -13,7 +13,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   imports: [MatFormFieldModule, MatButtonModule, MatInputModule, ReactiveFormsModule, MatProgressSpinnerModule],
   template: `
      <form [formGroup]="form">
-      <h3>Completion certificate</h3>
+      <h3 class="mat-headline-5">Completion certificate</h3>
      <mat-form-field appearance="outline">
       <mat-label>name</mat-label>
       <input formControlName="name" type="text" matInput>
