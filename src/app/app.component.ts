@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, ElementRef, ViewChild, signal } from '@angular/core';
 import { TemplateOneFormComponent } from './template-one-form/template-one-form.component';
 import { NgClass } from '@angular/common';
 import { TemplateTwoFormComponent } from './template-two-form/template-two-form.component';
@@ -64,40 +64,42 @@ import { TemplateFourFormComponent } from './template-four-form/template-four-fo
     </div>
     <div class="header">
       <h1 class="mat-headline-2">Create your certificate</h1>
-      <h3 class="mat-headline-6">Select a template, enter details and generate!</h3>
+      <h3 class="mat-headline-6">
+        Select a template, enter details and generate!
+      </h3>
     </div>
 
     <div class="templates">
       <img
         src="./assets/sample.jpg"
-        (click)="selected.set(1)"
+        (click)="selectTemplate(1)"
         [ngClass]="{ active: selected() === 1 }"
         alt=""
         class="template"
       />
       <img
         src="./assets/2.png"
-        (click)="selected.set(2)"
+        (click)="selectTemplate(2)"
         [ngClass]="{ active: selected() === 2 }"
         alt=""
         class="template"
       />
       <img
         src="./assets/3.png"
-        (click)="selected.set(3)"
+        (click)="selectTemplate(3)"
         [ngClass]="{ active: selected() === 3 }"
         alt=""
         class="template"
       />
       <img
         src="./assets/4.png"
-        (click)="selected.set(4)"
+        (click)="selectTemplate(4)"
         [ngClass]="{ active: selected() === 4 }"
         alt=""
         class="template"
       />
     </div>
-    <div class="form-wrapper">
+    <div #formArea class="form-wrapper">
       <div class="form-area">
         @switch (selected()) { @case (1) {
         <app-template-one-form />
@@ -111,7 +113,7 @@ import { TemplateFourFormComponent } from './template-four-form/template-four-fo
       </div>
     </div>
     <div class="footer">
-      <h3 class="mat-headline-6"> Certificate Generator</h3>
+      <h3 class="mat-headline-6"> &#169;Certificate Generator</h3>
     </div>
   `,
   styles: `
@@ -173,4 +175,14 @@ import { TemplateFourFormComponent } from './template-four-form/template-four-fo
 })
 export class AppComponent {
   selected = signal(1);
+  @ViewChild('formArea') formArea!: ElementRef;
+
+  selectTemplate(id: number) {
+    this.selected.set(id);
+    this.formArea.nativeElement.scrollIntoView({
+      behavior: 'smooth',
+      block: 'end',
+      inline: 'nearest',
+    });
+  }
 }
