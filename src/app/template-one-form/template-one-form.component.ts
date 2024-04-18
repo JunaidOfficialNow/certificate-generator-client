@@ -30,6 +30,20 @@ import { saveAs } from 'file-saver';
       <mat-error>Name is required</mat-error>
       </mat-form-field>
 
+      <mat-form-field appearance="outline">
+        <mat-label>Head of event</mat-label>
+        <input formControlName="head" type="text" matInput />
+      <mat-error>This field is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Instructor</mat-label>
+        <input name="naam" formControlName="instructor" type="text" matInput />
+      <mat-error>Instructor is required</mat-error>
+      </mat-form-field>
+
+
+
 
       @if (download) {
         <button mat-raised-button color="primary" (click)="downloadPdf()">
@@ -63,17 +77,19 @@ export class TemplateOneFormComponent {
 
   form = this.fb.group({
     name: ['', Validators.required],
+    head: ['', Validators.required],
+    instructor: ['', Validators.required],
   });
 
   http = inject(HttpClient);
   submitForm() {
-    if (!this.form.valid)  return this.form.markAsDirty();
+    if (!this.form.valid)  return this.form.markAllAsTouched();
     this.loading = true;
     this.name = this.form.value.name!;
     this.http
       .post(
         'http://localhost:8080/certificates/generate-participation-certificate',
-        { name: this.form.value.name }
+        { name: this.form.value.name, head: this.form.value.head, instructor: this.form.value.instructor }
       )
       .subscribe(() => {
         this.loading = false;

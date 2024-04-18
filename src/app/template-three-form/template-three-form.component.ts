@@ -62,7 +62,7 @@ export class TemplateThreeFormComponent {
 
   http = inject(HttpClient);
   submitForm() {
-    if (!this.form.valid) return this.form.markAsDirty();
+    if (!this.form.valid) return this.form.markAllAsTouched();
     this.loading = true;
     this.name = this.form.value.name!;
     this.http

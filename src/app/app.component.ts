@@ -71,7 +71,7 @@ import { TemplateFourFormComponent } from './template-four-form/template-four-fo
 
     <div class="templates">
       <img
-        src="./assets/sample.jpg"
+        src="./assets/1.png"
         (click)="selectTemplate(1)"
         [ngClass]="{ active: selected() === 1 }"
         alt=""
