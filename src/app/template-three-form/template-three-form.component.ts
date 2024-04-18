@@ -5,12 +5,12 @@ import { MatButtonModule } from '@angular/material/button'
 import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-template-one-form',
+  selector: 'app-template-three-form',
   standalone: true,
   imports: [MatFormFieldModule, MatButtonModule, MatInputModule, ReactiveFormsModule],
   template: `
      <form action="">
-      <h3>Participation certificate</h3>
+      <h3>Completion certificate</h3>
      <mat-form-field appearance="outline">
       <mat-label>name</mat-label>
       <input type="text" matInput>
@@ -38,6 +38,6 @@ import { ReactiveFormsModule } from '@angular/forms';
   }
   `
 })
-export class TemplateOneFormComponent {
+export class TemplateThreeFormComponent {
 
 }

@@ -1,10 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { TemplateOneFormComponent } from './template-one-form/template-one-form.component';
+import { NgClass } from '@angular/common';
+import { TemplateTwoFormComponent } from './template-two-form/template-two-form.component';
+import { TemplateThreeFormComponent } from './template-three-form/template-three-form.component';
+import { TemplateFourFormComponent } from './template-four-form/template-four-form.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [TemplateOneFormComponent],
+  imports: [TemplateOneFormComponent, NgClass, TemplateTwoFormComponent, TemplateThreeFormComponent, TemplateFourFormComponent],
   template: `
     <div class="header">
       <h1>Create your certificate</h1>
@@ -12,18 +16,37 @@ import { TemplateOneFormComponent } from './template-one-form/template-one-form.
     </div>
 
     <div class="templates">
-      <img src="./assets/sample.jpg" alt="" class="template" />
-      <img src="./assets/sample.jpg" alt="" class="template" />
-      <img src="./assets/sample.jpg" alt="" class="template" />
-      <img src="./assets/sample.jpg" alt="" class="template" />
+      <img src="./assets/sample.jpg" (click)="selected.set(1)" [ngClass]="{'active': selected() === 1}" alt="" class="template" />
+      <img src="./assets/2.png" (click)="selected.set(2)" [ngClass]="{'active': selected() === 2}" alt="" class="template" />
+      <img src="./assets/3.png" (click)="selected.set(3)" [ngClass]="{'active': selected() === 3}" alt="" class="template" />
+      <img src="./assets/4.png" (click)="selected.set(4)" [ngClass]="{'active': selected() === 4}" alt="" class="template" />
     </div>
     <div class="form-wrapper">
       <div class="form-area">
-        <app-template-one-form />
+
+      @switch (selected()) {
+        @case (1) {
+          <app-template-one-form />
+        }
+        @case (2) {
+          <app-template-two-form/>
+        }
+        @case (3) {
+          <app-template-three-form/>
+        }
+
+        @case (4) {
+          <app-template-four-form/>
+        }
+      }
       </div>
     </div>
   `,
   styles: `
+
+  .active {
+    border: 4px solid blue;
+  }
 
 .form-wrapper {
   margin-top: 2rem;
@@ -62,4 +85,6 @@ import { TemplateOneFormComponent } from './template-one-form/template-one-form.
     }
   `,
 })
-export class AppComponent {}
+export class AppComponent {
+  selected = signal(1);
+}
