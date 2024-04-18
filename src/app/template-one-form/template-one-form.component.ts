@@ -26,6 +26,7 @@ import { saveAs } from 'file-saver';
       <mat-form-field appearance="outline">
         <mat-label>name</mat-label>
         <input name="naam" formControlName="name" type="text" matInput />
+        <mat-error>Name is required</mat-error>
       </mat-form-field>
 
 
@@ -57,6 +58,7 @@ export class TemplateOneFormComponent {
   fb = inject(FormBuilder);
   loading = false;
   download = false;
+  name = '';
 
   form = this.fb.group({
     name: '',
@@ -65,6 +67,7 @@ export class TemplateOneFormComponent {
   http = inject(HttpClient);
   submitForm() {
     this.loading = true;
+    this.name = this.form.value.name!;
     this.http
       .post(
         'http://localhost:8080/certificates/generate-participation-certificate',
@@ -79,9 +82,12 @@ export class TemplateOneFormComponent {
   downloadPdf() {
     this.http
       .get(
-        'http://localhost:8080/certificates/download/' + this.form.value.name,
+        'http://localhost:8080/certificates/download/' + this.name,
         { responseType: 'blob' }
       )
-      .subscribe((data: Blob) => (saveAs(data), this.download = false));
+      .subscribe((data: Blob) => {
+        (saveAs(data), this.download = false);
+        this.form.reset()
+      })
   }
 }

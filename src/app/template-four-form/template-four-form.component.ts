@@ -66,6 +66,7 @@ export class TemplateFourFormComponent {
   fb = inject(FormBuilder);
   loading = false;
   download = false;
+  name = '';
 
   form = this.fb.group({
     name: '',
@@ -78,6 +79,7 @@ export class TemplateFourFormComponent {
   http = inject(HttpClient);
   submitForm() {
     this.loading = true;
+    this.name = this.form.value.name!;
     this.http
       .post(
         'http://localhost:8080/certificates/generate-recognition-certificate',
@@ -98,10 +100,10 @@ export class TemplateFourFormComponent {
   downloadPdf() {
     this.http
       .get(
-        'http://localhost:8080/certificates/download/' + this.form.value.name,
+        'http://localhost:8080/certificates/download/' + this.name,
         { responseType: 'blob' }
       )
-      .subscribe((data: Blob) => (saveAs(data), (this.download = false)));
+      .subscribe((data: Blob) => (saveAs(data), (this.download = false), this.form.reset()));
   }
 
 }

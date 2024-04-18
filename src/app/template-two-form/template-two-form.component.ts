@@ -60,7 +60,7 @@ export class TemplateTwoFormComponent {
   fb = inject(FormBuilder);
   loading = false;
   download = false;
-
+  name = '';
   form = this.fb.group({
     name: '',
     representative1: '',
@@ -70,6 +70,7 @@ export class TemplateTwoFormComponent {
   http = inject(HttpClient);
   submitForm() {
     this.loading = true;
+    this.name = this.form.value.name!;
     this.http
       .post(
         'http://localhost:8080/certificates/generate-achievement-certificate',
@@ -88,9 +89,9 @@ export class TemplateTwoFormComponent {
   downloadPdf() {
     this.http
       .get(
-        'http://localhost:8080/certificates/download/' + this.form.value.name,
+        'http://localhost:8080/certificates/download/' + this.name,
         { responseType: 'blob' }
       )
-      .subscribe((data: Blob) => (saveAs(data), (this.download = false)));
+      .subscribe((data: Blob) => (saveAs(data), (this.download = false), this.form.reset()));
   }
 }
