@@ -6,6 +6,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {
   FormBuilder,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { saveAs } from 'file-saver';
@@ -26,7 +27,7 @@ import { saveAs } from 'file-saver';
       <mat-form-field appearance="outline">
         <mat-label>name</mat-label>
         <input name="naam" formControlName="name" type="text" matInput />
-        <mat-error>Name is required</mat-error>
+      <mat-error>Name is required</mat-error>
       </mat-form-field>
 
 
@@ -61,11 +62,12 @@ export class TemplateOneFormComponent {
   name = '';
 
   form = this.fb.group({
-    name: '',
+    name: ['', Validators.required],
   });
 
   http = inject(HttpClient);
   submitForm() {
+    if (!this.form.valid)  return this.form.markAsDirty();
     this.loading = true;
     this.name = this.form.value.name!;
     this.http
