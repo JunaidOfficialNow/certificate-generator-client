@@ -153,7 +153,7 @@ import { TemplateFourFormComponent } from './template-four-form/template-four-fo
     padding: 2rem;
   }
   .templates {
-    display:  flex;
+    display:  grid;
     gap: 2rem; 
     justify-content: center;
     margin-top: 2rem;
