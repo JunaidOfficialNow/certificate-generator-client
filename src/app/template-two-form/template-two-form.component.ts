@@ -6,6 +6,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import saveAs from 'file-saver';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-template-two-form',
@@ -56,6 +57,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 })
 export class TemplateTwoFormComponent {
   fb = inject(FormBuilder);
+  matdialogRef = inject(MatDialogRef);
   loading = false;
   download = false;
   name = '';
@@ -67,7 +69,7 @@ export class TemplateTwoFormComponent {
 
   http = inject(HttpClient);
   submitForm() {
-  if (!this.form.valid) return this.form.markAllAsTouched();
+    if (!this.form.valid) return this.form.markAllAsTouched();
     this.loading = true;
     this.name = this.form.value.name!;
     this.http
@@ -87,10 +89,16 @@ export class TemplateTwoFormComponent {
 
   downloadPdf() {
     this.http
-      .get(
-        'http://localhost:8080/certificates/download/' + this.name,
-        { responseType: 'blob' }
-      )
-      .subscribe((data: Blob) => (saveAs(data), (this.download = false), this.form.reset()));
+      .get('http://localhost:8080/certificates/download/' + this.name, {
+        responseType: 'blob',
+      })
+      .subscribe(
+        (data: Blob) => (
+          saveAs(data),
+          (this.download = false),
+          this.form.reset(),
+          this.matdialogRef.close()
+        )
+      );
   }
 }
