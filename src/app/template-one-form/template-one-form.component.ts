@@ -80,7 +80,7 @@ export class TemplateOneFormComponent {
     this.name = this.form.value.name!;
     this.http
       .post(
-        'http://localhost:8080/certificates/generate-participation-certificate',
+        'http://localhost:8080/certificates/generate-appreciation-certificate',
         { name: this.form.value.name, representative1: this.form.value.repre1, representative2: this.form.value.repre2 }
       )
       .subscribe(() => {

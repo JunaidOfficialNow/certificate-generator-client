@@ -27,14 +27,21 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
       </mat-form-field>
 
       <mat-form-field appearance="fill">
-        <mat-label>representative 1</mat-label>
-        <input formControlName="representative1" type="text" matInput />
+        <mat-label>Field</mat-label>
+        <input formControlName="field" type="text" matInput />
         <mat-error>This field is required</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
-        <mat-label>representative 2</mat-label>
-        <input formControlName="representative2" type="text" matInput />
+        <mat-label>Head of Event</mat-label>
+        <input formControlName="head" type="text" matInput />
+        <mat-error>This field is required</mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="fill">
+        <mat-label>Mentor</mat-label>
+        <input formControlName="mentor" type="text" matInput />
         <mat-error>This field is required</mat-error>
       </mat-form-field>
 
@@ -61,8 +68,9 @@ export class TemplateTwoFormComponent {
   name = '';
   form = this.fb.group({
     name: ['', Validators.required],
-    representative1: ['', Validators.required],
-    representative2: ['', Validators.required],
+    field: ['', Validators.required],
+    head: ['', Validators.required],
+    mentor: ['', Validators.required],
   });
 
   http = inject(HttpClient);
@@ -75,8 +83,9 @@ export class TemplateTwoFormComponent {
         'http://localhost:8080/certificates/generate-achievement-certificate',
         {
           name: this.form.value.name,
-          representative1: this.form.value.representative1,
-          representative2: this.form.value.representative2,
+          field: this.form.value.field,
+          head: this.form.value.head,
+          mentor: this.form.value.mentor,
         }
       )
       .subscribe(() => {
