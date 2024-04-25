@@ -10,6 +10,7 @@ import {
 } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { saveAs } from 'file-saver';
+import { MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-template-one-form',
   standalone: true,
@@ -23,7 +24,7 @@ import { saveAs } from 'file-saver';
   ],
   template: `
     <form [formGroup]="form">
-      <h3 class="mat-headline-5">Participation certificate</h3>
+      <h3 class="mat-headline-5">Appreciation certificate</h3>
       <mat-form-field >
         <mat-label>name</mat-label>
         <input name="naam" formControlName="name" type="text" matInput />
@@ -31,15 +32,15 @@ import { saveAs } from 'file-saver';
       </mat-form-field>
 
       <mat-form-field appearance="fill">
-        <mat-label>Head of event</mat-label>
-        <input formControlName="head" type="text" matInput />
+        <mat-label>Supervisor</mat-label>
+        <input formControlName="supervisor" type="text" matInput />
       <mat-error>This field is required</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
-        <mat-label>Instructor</mat-label>
-        <input name="naam" formControlName="instructor" type="text" matInput />
-      <mat-error>Instructor is required</mat-error>
+        <mat-label>Manager</mat-label>
+        <input name="naam" formControlName="manager" type="text" matInput />
+      <mat-error>Manager is required</mat-error>
       </mat-form-field>
 
       @if (download) {
@@ -63,14 +64,15 @@ import { saveAs } from 'file-saver';
 })
 export class TemplateOneFormComponent {
   fb = inject(FormBuilder);
+  matDialogRef = inject(MatDialogRef);
   loading = false;
   download = false;
   name = '';
 
   form = this.fb.group({
     name: ['', Validators.required],
-    head: ['', Validators.required],
-    instructor: ['', Validators.required],
+    supervisor: ['', Validators.required],
+    manager: ['', Validators.required],
   });
 
   http = inject(HttpClient);
@@ -80,8 +82,8 @@ export class TemplateOneFormComponent {
     this.name = this.form.value.name!;
     this.http
       .post(
-        'http://localhost:8080/certificates/generate-participation-certificate',
-        { name: this.form.value.name, head: this.form.value.head, instructor: this.form.value.instructor }
+        'http://localhost:8080/certificates/generate-appreciation-certificate',
+        { name: this.form.value.name, supervisor: this.form.value.supervisor, manager: this.form.value.manager }
       )
       .subscribe(() => {
         this.loading = false;
@@ -98,6 +100,7 @@ export class TemplateOneFormComponent {
       .subscribe((data: Blob) => {
         (saveAs(data), this.download = false);
         this.form.reset()
+        this.matDialogRef.close();
       })
   }
 }
