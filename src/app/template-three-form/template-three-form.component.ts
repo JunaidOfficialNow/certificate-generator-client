@@ -6,6 +6,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import saveAs from 'file-saver';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-template-three-form',
@@ -21,28 +22,18 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
      </mat-form-field>
 
      <mat-form-field appearance="fill">
-      <mat-label>month</mat-label>
-      <input formControlName="month" type="text" matInput>
-      <mat-error>description is required</mat-error>
-     </mat-form-field>
-
-     <mat-form-field appearance="fill">
-      <mat-label>year</mat-label>
-      <input formControlName="year" type="text" matInput>
-      <mat-error>year is required</mat-error>
-     </mat-form-field>
-
-     <mat-form-field appearance="fill">
-      <mat-label>Chief Executive officer</mat-label>
-      <input formControlName="CEO" type="text" matInput>
+      <mat-label>Chief Executive</mat-label>
+      <input formControlName="chief" type="text" matInput>
       <mat-error>This field is required</mat-error>
      </mat-form-field>
 
      <mat-form-field appearance="fill">
-      <mat-label>Chief Operating officer</mat-label>
-      <input formControlName="COO" type="text" matInput>
-      <mat-error>This field is required</mat-error>
+      <mat-label>Mentor</mat-label>
+      <input formControlName="mentor" type="text" matInput>
+      <mat-error>Mentor is required</mat-error>
      </mat-form-field>
+
+
 
 
      @if (download) {
@@ -60,21 +51,21 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
         }
       </button>
       }
+     </form>
 
   `,
 })
 export class TemplateThreeFormComponent {
   fb = inject(FormBuilder);
+  matDialogRef = inject(MatDialogRef);
   loading = false;
   download = false;
   name = '';
 
   form = this.fb.group({
     name: ['', Validators.required],
-    year: ['', Validators.required],
-    month: ['', Validators.required],
-    COO: ['', Validators.required],
-    CEO: ['', Validators.required],
+    chief: ['', Validators.required],
+    mentor: ['', Validators.required],
   });
 
   http = inject(HttpClient);
@@ -87,10 +78,8 @@ export class TemplateThreeFormComponent {
         'http://localhost:8080/certificates/generate-completion-certificate',
         {
           name: this.form.value.name,
-          year: this.form.value.year,
-          month: this.form.value.month,
-          CEO:  this.form.value.CEO,
-          COO: this.form.value.COO,
+          chief: this.form.value.chief,
+          mentor: this.form.value.mentor
         }
       )
       .subscribe(() => {
@@ -105,7 +94,7 @@ export class TemplateThreeFormComponent {
         'http://localhost:8080/certificates/download/' + this.name,
         { responseType: 'blob' }
       )
-      .subscribe((data: Blob) => (saveAs(data), (this.download = false), this.form.reset()));
+      .subscribe((data: Blob) => (saveAs(data), (this.download = false), this.form.reset(), this.matDialogRef.close()));
   }
 
 }
