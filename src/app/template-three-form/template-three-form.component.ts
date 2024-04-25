@@ -21,29 +21,18 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
      </mat-form-field>
 
      <mat-form-field appearance="fill">
-      <mat-label>month</mat-label>
-      <input formControlName="month" type="text" matInput>
+      <mat-label>Founder</mat-label>
+      <input formControlName="founder" type="text" matInput>
       <mat-error>description is required</mat-error>
      </mat-form-field>
 
      <mat-form-field appearance="fill">
-      <mat-label>year</mat-label>
-      <input formControlName="year" type="text" matInput>
+      <mat-label>Manager</mat-label>
+      <input formControlName="manager" type="text" matInput>
       <mat-error>year is required</mat-error>
      </mat-form-field>
 
-     <mat-form-field appearance="fill">
-      <mat-label>Chief Executive officer</mat-label>
-      <input formControlName="CEO" type="text" matInput>
-      <mat-error>This field is required</mat-error>
-     </mat-form-field>
-
-     <mat-form-field appearance="fill">
-      <mat-label>Chief Operating officer</mat-label>
-      <input formControlName="COO" type="text" matInput>
-      <mat-error>This field is required</mat-error>
-     </mat-form-field>
-
+    
 
      @if (download) {
         <button mat-raised-button color="primary" (click)="downloadPdf()">
@@ -71,10 +60,8 @@ export class TemplateThreeFormComponent {
 
   form = this.fb.group({
     name: ['', Validators.required],
-    year: ['', Validators.required],
-    month: ['', Validators.required],
-    COO: ['', Validators.required],
-    CEO: ['', Validators.required],
+    founder: ['', Validators.required],
+    manager: ['', Validators.required],
   });
 
   http = inject(HttpClient);
@@ -87,10 +74,8 @@ export class TemplateThreeFormComponent {
         'http://localhost:8080/certificates/generate-completion-certificate',
         {
           name: this.form.value.name,
-          year: this.form.value.year,
-          month: this.form.value.month,
-          CEO:  this.form.value.CEO,
-          COO: this.form.value.COO,
+          founder: this.form.value.founder,
+          manager: this.form.value.manager,
         }
       )
       .subscribe(() => {
