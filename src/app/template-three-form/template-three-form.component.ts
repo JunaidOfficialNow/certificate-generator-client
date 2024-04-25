@@ -23,13 +23,13 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
      <mat-form-field appearance="fill">
       <mat-label>Founder</mat-label>
       <input formControlName="founder" type="text" matInput>
-      <mat-error>description is required</mat-error>
+      <mat-error>Founder is required</mat-error>
      </mat-form-field>
 
      <mat-form-field appearance="fill">
       <mat-label>Manager</mat-label>
       <input formControlName="manager" type="text" matInput>
-      <mat-error>year is required</mat-error>
+      <mat-error>Manager is required</mat-error>
      </mat-form-field>
 
     
@@ -49,6 +49,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
         }
       </button>
       }
+     </form>
 
   `,
 })

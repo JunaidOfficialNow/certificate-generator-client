@@ -39,7 +39,7 @@ import { saveAs } from 'file-saver';
       <mat-form-field appearance="fill">
         <mat-label>Representative 2</mat-label>
         <input name="naam" formControlName="repre2" type="text" matInput />
-      <mat-error>Instructor is required</mat-error>
+      <mat-error>This field is required</mat-error>
       </mat-form-field>
 
       @if (download) {

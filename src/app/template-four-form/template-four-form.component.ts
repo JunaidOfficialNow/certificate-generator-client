@@ -21,29 +21,17 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
      </mat-form-field>
 
      <mat-form-field appearance="fill">
-      <mat-label>month</mat-label>
-      <input formControlName="month" type="text" matInput>
-      <mat-error>Month is required</mat-error>
+      <mat-label>Workshop Coach</mat-label>
+      <input formControlName="coach" type="text" matInput>
+      <mat-error>This field is required</mat-error>
      </mat-form-field>
 
      <mat-form-field appearance="fill">
-      <mat-label>year</mat-label>
-      <input formControlName="year" type="text" matInput>
-      <mat-error>year is required</mat-error>
+      <mat-label>Head of Event</mat-label>
+      <input formControlName="head" type="text" matInput>
+      <mat-error>This field is required</mat-error>
      </mat-form-field>
 
-     <mat-form-field appearance="fill">
-      <mat-label>supervisor</mat-label>
-      <input formControlName="supervisor" type="text" matInput>
-      <mat-error>supervisor is required</mat-error>
-     </mat-form-field>
-
-     <mat-form-field appearance="fill">
-      <mat-label>manager</mat-label>
-      <input formControlName="manager" type="text" matInput>
-      <mat-error>manager is required</mat-error>
-     </mat-form-field>
-     </form>
 
      @if (download) {
         <button mat-raised-button color="primary" (click)="downloadPdf()">
@@ -60,6 +48,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
         }
       </button>
       }
+      </form>
   `,
 })
 export class TemplateFourFormComponent {
@@ -70,10 +59,8 @@ export class TemplateFourFormComponent {
 
   form = this.fb.group({
     name: ['', Validators.required],
-    month: ['', Validators.required],
-    year: ['', Validators.required],
-    supervisor: ['', Validators.required],
-    manager: ['', Validators.required]
+    coach: ['', Validators.required],
+    head: ['', Validators.required],
   });
 
   http = inject(HttpClient);
@@ -86,10 +73,8 @@ export class TemplateFourFormComponent {
         'http://localhost:8080/certificates/generate-recognition-certificate',
         {
           name: this.form.value.name,
-          month: this.form.value.month,
-          year: this.form.value.year,
-          supervisor: this.form.value.supervisor,
-          manager: this.form.value.manager
+          head: this.form.value.head,
+          coach: this.form.value.coach,
         }
       )
       .subscribe(() => {
