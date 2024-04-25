@@ -35,78 +35,110 @@
     padding: 2rem;
   }
   .templates {
-    place-items: center;
-    display:  inline-grid;
-    grid-template-columns: 1fr 1fr;
+    display:  flex;
+    flex-direction: column;
     gap: 2rem; 
     justify-content: center;
-    margin-top: 2rem;
   }
   .template {
-     width: 18rem;
-     height: 13rem;
+     width: 9rem;
+     height: 6rem;
   }
     h1 {
       margin-bottom: 2rem!important;
       font-weight: bolder;
     }
-    .header {
-      width: 100%;
+
+
+    .container {
+      width: 100vw;
+      height: 100vh;
       display: flex;
-      color: white;
-      background-image: url('./assets/green-bg.avif');
-      flex-direction: column;
-      align-items: center;
-      padding-bottom: 2rem;
     }
 
-    .templates-wrapper {
+    .sidebar {
+      padding: 0 1rem 0 1rem;
+      position: fixed;
+      height: 100vh;
+      width: 20vw;
       display: flex;
-      align-items: center;
+      flex-direction: column;
       justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      /* background-color: cadetblue; */
+    }
+
+    .main {
+      padding-left: 20vw;
+      padding-top: 2rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
   
 </style>
 
-<div class="header">
-  <h1 class="mat-headline-2">Create your certificate</h1>
-  <!-- <h3 class="mat-headline-6">
-    Select a template, enter details and generate!
-  </h3> -->
-  <div class="templates-wrapper">
-    <div class="templates">
-      <img
-        src="./assets/1.png"
-        (click)="selectTemplate(1)"
-        [ngClass]="{ active: selected() === 1 }"
-        alt=""
-        class="template"
-      />
-      <img
-        src="./assets/2.png"
-        (click)="selectTemplate(2)"
-        [ngClass]="{ active: selected() === 2 }"
-        alt=""
-        class="template"
-      />
-      <img
-        src="./assets/3.png"
-        (click)="selectTemplate(3)"
-        [ngClass]="{ active: selected() === 3 }"
-        alt=""
-        class="template"
-      />
-      <img
-        src="./assets/4.png"
-        (click)="selectTemplate(4)"
-        [ngClass]="{ active: selected() === 4 }"
-        alt=""
-        class="template"
-      />
-    </div>
-  
-  </div>
+<div class="container">
+  <div class="sidebar mat-elevation-z8">
+    <h3 class="mat-headline-5">Templates</h3>
+        <img
+          src="./assets/1.png"
+          (click)="selectTemplate(1)"
+          [ngClass]="{ active: selected() === 1 }"
+          alt=""
+          class="template"
+        />
+        <img
+          src="./assets/2.png"
+          (click)="selectTemplate(2)"
+          [ngClass]="{ active: selected() === 2 }"
+          alt=""
+          class="template"
+        />
+        <img
+          src="./assets/3.png"
+          (click)="selectTemplate(3)"
+          [ngClass]="{ active: selected() === 3 }"
+          alt=""
+          class="template"
+        />
+        <img
+          src="./assets/4.png"
+          (click)="selectTemplate(4)"
+          [ngClass]="{ active: selected() === 4 }"
+          alt=""
+          class="template"
+        />
+      </div>
+
+      <div class="main">
+
+        <div class="header">
+          <h1 class="mat-headline-4">Create your ceritificate</h1>
+        </div>
+
+        <div class="form-area">
+
+          @switch (selected()) {
+            @case (1) {
+              <app-template-one-form/>
+            }
+            @case (2) {
+              <app-template-two-form/>
+            }
+            @case (3) {
+              <app-template-three-form/>
+            }
+            @case (4) {
+              <app-template-four-form/>
+            }
+          }
+
+        </div>
+
+      </div>
+    
+
 </div>
-
-
-
