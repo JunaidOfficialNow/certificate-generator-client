@@ -3,3 +3,9 @@
 html, body { height: 100%; scroll-behavior: smooth!important; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+form {
+  width: 40vw;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+}

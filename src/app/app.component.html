@@ -1,0 +1,112 @@
+<style>
+     h3 {
+    margin-bottom:0rem !important;
+   }
+  .footer {
+    height: 8vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    border-top: 2px solid;
+    background-color: #FFd700;
+  }
+
+  .active {
+    border: 2px solid;
+    border-radius: 2px;
+    transform: scale(1.1);
+    transition: 0.2s ease-out;
+  }
+
+.form-wrapper {
+  margin-top: 2rem;
+  padding-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+  .form-area {
+    border: 2px solid;
+    border-radius: 15px;
+    width:40%;
+    padding: 2rem;
+  }
+  .templates {
+    place-items: center;
+    display:  inline-grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem; 
+    justify-content: center;
+    margin-top: 2rem;
+  }
+  .template {
+     width: 18rem;
+     height: 13rem;
+  }
+    h1 {
+      margin-bottom: 2rem!important;
+      font-weight: bolder;
+    }
+    .header {
+      width: 100%;
+      display: flex;
+      color: white;
+      background-image: url('./assets/green-bg.avif');
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 2rem;
+    }
+
+    .templates-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  
+</style>
+
+<div class="header">
+  <h1 class="mat-headline-2">Create your certificate</h1>
+  <!-- <h3 class="mat-headline-6">
+    Select a template, enter details and generate!
+  </h3> -->
+  <div class="templates-wrapper">
+    <div class="templates">
+      <img
+        src="./assets/1.png"
+        (click)="selectTemplate(1)"
+        [ngClass]="{ active: selected() === 1 }"
+        alt=""
+        class="template"
+      />
+      <img
+        src="./assets/2.png"
+        (click)="selectTemplate(2)"
+        [ngClass]="{ active: selected() === 2 }"
+        alt=""
+        class="template"
+      />
+      <img
+        src="./assets/3.png"
+        (click)="selectTemplate(3)"
+        [ngClass]="{ active: selected() === 3 }"
+        alt=""
+        class="template"
+      />
+      <img
+        src="./assets/4.png"
+        (click)="selectTemplate(4)"
+        [ngClass]="{ active: selected() === 4 }"
+        alt=""
+        class="template"
+      />
+    </div>
+  
+  </div>
+</div>
+
+
+

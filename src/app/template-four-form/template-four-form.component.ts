@@ -14,31 +14,31 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   template: `
      <form [formGroup]="form">
       <h3 class="mat-headline-5">Recognition certificate</h3>
-     <mat-form-field appearance="outline">
+     <mat-form-field appearance="fill">
       <mat-label>name</mat-label>
       <input formControlName="name" type="text" matInput>
       <mat-error>Name is required</mat-error>
      </mat-form-field>
 
-     <mat-form-field appearance="outline">
+     <mat-form-field appearance="fill">
       <mat-label>month</mat-label>
       <input formControlName="month" type="text" matInput>
       <mat-error>Month is required</mat-error>
      </mat-form-field>
 
-     <mat-form-field appearance="outline">
+     <mat-form-field appearance="fill">
       <mat-label>year</mat-label>
       <input formControlName="year" type="text" matInput>
       <mat-error>year is required</mat-error>
      </mat-form-field>
 
-     <mat-form-field appearance="outline">
+     <mat-form-field appearance="fill">
       <mat-label>supervisor</mat-label>
       <input formControlName="supervisor" type="text" matInput>
       <mat-error>supervisor is required</mat-error>
      </mat-form-field>
 
-     <mat-form-field appearance="outline">
+     <mat-form-field appearance="fill">
       <mat-label>manager</mat-label>
       <input formControlName="manager" type="text" matInput>
       <mat-error>manager is required</mat-error>
@@ -61,11 +61,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
       </button>
       }
   `,
-  styles: `
-  mat-form-field, form {
-    width: 100%
-  }
-  `
 })
 export class TemplateFourFormComponent {
   fb = inject(FormBuilder);

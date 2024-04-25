@@ -20,19 +20,19 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   template: `
     <form [formGroup]="form">
       <h3 class="mat-headline-5">Achievement certificate</h3>
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="fill">
         <mat-label>name</mat-label>
         <input formControlName="name" type="text" matInput />
         <mat-error>Name is required</mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="fill">
         <mat-label>representative 1</mat-label>
         <input formControlName="representative1" type="text" matInput />
         <mat-error>This field is required</mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="fill">
         <mat-label>representative 2</mat-label>
         <input formControlName="representative2" type="text" matInput />
         <mat-error>This field is required</mat-error>
@@ -52,11 +52,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
       </button>
       }
     </form>
-  `,
-  styles: `
-  mat-form-field, form {
-    width: 100%
-  }
   `,
 })
 export class TemplateTwoFormComponent {

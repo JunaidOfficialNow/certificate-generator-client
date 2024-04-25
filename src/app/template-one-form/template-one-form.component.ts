@@ -24,26 +24,23 @@ import { saveAs } from 'file-saver';
   template: `
     <form [formGroup]="form">
       <h3 class="mat-headline-5">Participation certificate</h3>
-      <mat-form-field appearance="outline">
+      <mat-form-field >
         <mat-label>name</mat-label>
         <input name="naam" formControlName="name" type="text" matInput />
       <mat-error>Name is required</mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="fill">
         <mat-label>Head of event</mat-label>
         <input formControlName="head" type="text" matInput />
       <mat-error>This field is required</mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="fill">
         <mat-label>Instructor</mat-label>
         <input name="naam" formControlName="instructor" type="text" matInput />
       <mat-error>Instructor is required</mat-error>
       </mat-form-field>
-
-
-
 
       @if (download) {
         <button mat-raised-button color="primary" (click)="downloadPdf()">
@@ -62,11 +59,6 @@ import { saveAs } from 'file-saver';
       }
 
     </form>
-  `,
-  styles: `
-  mat-form-field, form {
-    width: 100%
-  }
   `,
 })
 export class TemplateOneFormComponent {
