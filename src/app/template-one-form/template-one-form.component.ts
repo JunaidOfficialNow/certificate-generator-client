@@ -23,7 +23,7 @@ import { saveAs } from 'file-saver';
   ],
   template: `
     <form [formGroup]="form">
-      <h3 class="mat-headline-5">Participation certificate</h3>
+      <h3 class="mat-headline-5">Appreciation certificate</h3>
       <mat-form-field >
         <mat-label>name</mat-label>
         <input name="naam" formControlName="name" type="text" matInput />
@@ -31,14 +31,14 @@ import { saveAs } from 'file-saver';
       </mat-form-field>
 
       <mat-form-field appearance="fill">
-        <mat-label>Head of event</mat-label>
-        <input formControlName="head" type="text" matInput />
+        <mat-label>Representative 1</mat-label>
+        <input formControlName="repre1" type="text" matInput />
       <mat-error>This field is required</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
-        <mat-label>Instructor</mat-label>
-        <input name="naam" formControlName="instructor" type="text" matInput />
+        <mat-label>Representative 2</mat-label>
+        <input name="naam" formControlName="repre2" type="text" matInput />
       <mat-error>Instructor is required</mat-error>
       </mat-form-field>
 
@@ -69,8 +69,8 @@ export class TemplateOneFormComponent {
 
   form = this.fb.group({
     name: ['', Validators.required],
-    head: ['', Validators.required],
-    instructor: ['', Validators.required],
+    repre1: ['', Validators.required],
+    repre2: ['', Validators.required],
   });
 
   http = inject(HttpClient);
@@ -81,7 +81,7 @@ export class TemplateOneFormComponent {
     this.http
       .post(
         'http://localhost:8080/certificates/generate-participation-certificate',
-        { name: this.form.value.name, head: this.form.value.head, instructor: this.form.value.instructor }
+        { name: this.form.value.name, representative1: this.form.value.repre1, representative2: this.form.value.repre2 }
       )
       .subscribe(() => {
         this.loading = false;
