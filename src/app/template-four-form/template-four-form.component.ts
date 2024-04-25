@@ -6,6 +6,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import saveAs from 'file-saver';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-template-four-form',
@@ -21,29 +22,18 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
      </mat-form-field>
 
      <mat-form-field appearance="fill">
-      <mat-label>month</mat-label>
-      <input formControlName="month" type="text" matInput>
-      <mat-error>Month is required</mat-error>
+      <mat-label>Head</mat-label>
+      <input formControlName="head" type="text" matInput>
+      <mat-error>Head is required</mat-error>
      </mat-form-field>
 
      <mat-form-field appearance="fill">
-      <mat-label>year</mat-label>
-      <input formControlName="year" type="text" matInput>
-      <mat-error>year is required</mat-error>
+      <mat-label>CEO</mat-label>
+      <input formControlName="ceo" type="text" matInput>
+      <mat-error>CEO is required</mat-error>
      </mat-form-field>
 
-     <mat-form-field appearance="fill">
-      <mat-label>supervisor</mat-label>
-      <input formControlName="supervisor" type="text" matInput>
-      <mat-error>supervisor is required</mat-error>
-     </mat-form-field>
 
-     <mat-form-field appearance="fill">
-      <mat-label>manager</mat-label>
-      <input formControlName="manager" type="text" matInput>
-      <mat-error>manager is required</mat-error>
-     </mat-form-field>
-     </form>
 
      @if (download) {
         <button mat-raised-button color="primary" (click)="downloadPdf()">
@@ -60,20 +50,20 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
         }
       </button>
       }
+      </form>
   `,
 })
 export class TemplateFourFormComponent {
   fb = inject(FormBuilder);
+  matDialogRef = inject(MatDialogRef);
   loading = false;
   download = false;
   name = '';
 
   form = this.fb.group({
     name: ['', Validators.required],
-    month: ['', Validators.required],
-    year: ['', Validators.required],
-    supervisor: ['', Validators.required],
-    manager: ['', Validators.required]
+    head: ['', Validators.required],
+    ceo: ['', Validators.required],
   });
 
   http = inject(HttpClient);
@@ -86,10 +76,8 @@ export class TemplateFourFormComponent {
         'http://localhost:8080/certificates/generate-recognition-certificate',
         {
           name: this.form.value.name,
-          month: this.form.value.month,
-          year: this.form.value.year,
-          supervisor: this.form.value.supervisor,
-          manager: this.form.value.manager
+          head: this.form.value.head,
+          ceo: this.form.value.ceo,
         }
       )
       .subscribe(() => {
@@ -104,7 +92,7 @@ export class TemplateFourFormComponent {
         'http://localhost:8080/certificates/download/' + this.name,
         { responseType: 'blob' }
       )
-      .subscribe((data: Blob) => (saveAs(data), (this.download = false), this.form.reset()));
+      .subscribe((data: Blob) => (saveAs(data), (this.download = false), this.form.reset(), this.matDialogRef.close()));
   }
 
 }
